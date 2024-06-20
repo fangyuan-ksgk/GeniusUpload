@@ -1,13 +1,7 @@
-# URL of the webpage to scrape
-url = "https://lexfridman.com/charan-ranganath-transcript"
-
-import requests
-from bs4 import BeautifulSoup
+# Get all the names on this page 
 from utils import *
-# Send a GET request to the webpage
-response = requests.get(url)
-# Check if the request was successful
-if response.status_code == 200:
-    # Parse the HTML content using BeautifulSoup
-    soup = BeautifulSoup(response.content, 'html.parser')
-    parse_lex_transcript(soup)
+
+infos = get_lex_links()
+for name, _ in infos.items():
+    name_lower = to_lower_name(name)
+    parse_lex_transcript(name_lower)
